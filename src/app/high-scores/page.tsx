@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
-import { displayErrorToast } from '~/utils/helpers/toast';
+import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import CenteredCard from '~/components/templates/CenteredCard';
 
 const ScoresPage: FC = () => {
@@ -32,7 +32,7 @@ const ScoresPage: FC = () => {
   return (
     <CenteredCard>
       <Stack spacing={2}>
-        <Typography variant="h4">High Scores</Typography>
+        <Typography variant="h4">Highscores</Typography>
         {isLoading && <Typography>Loading...</Typography>}
         {!scores.length && !isLoading && (
           <Typography>No scores yet!</Typography>
@@ -44,13 +44,24 @@ const ScoresPage: FC = () => {
                 <Typography
                   flexGrow={1}
                 >{`${index + 1}. ${score.string} (${score.user.username})`}</Typography>
-                <Typography>{score.score}</Typography>
+                <Typography ml={20}>{score.score}</Typography>
               </Stack>
             ))}
           </Stack>
         )}
         <Stack sx={{ mt: '40px !important' }} spacing={2}>
-          <Button variant="contained" onClick={() => refetch()}>
+          <Button
+            variant="contained"
+            onClick={() =>
+              refetch({ throwOnError: true })
+                .then(() => {
+                  displaySuccessToast('Scores refreshed!');
+                })
+                .catch((error) => {
+                  displayErrorToast(error);
+                })
+            }
+          >
             Refresh
           </Button>
           <Button variant="outlined" onClick={() => push(ROUTES.HOME)}>
