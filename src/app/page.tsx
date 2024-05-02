@@ -20,7 +20,7 @@ export default function Home() {
     <CenteredCard>
       <Stack spacing={4}>
         <Typography variant="h4">Welcome!</Typography>
-        <Stack spacing={2}>
+        <Stack spacing={2} mt="40px !important" justifyContent="center">
           <Button
             variant="contained"
             color="primary"

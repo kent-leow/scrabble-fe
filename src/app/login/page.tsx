@@ -20,12 +20,7 @@ import CenteredCard from '~/components/templates/CenteredCard';
 export default function LoginPage() {
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<ILoginForm>();
+  const { register, handleSubmit } = useForm<ILoginForm>();
   const { login } = useContext(AuthContext);
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => login(data);
@@ -67,7 +62,7 @@ export default function LoginPage() {
             }}
             {...register('password')}
           />
-          <Stack sx={{ mt: '40px !important' }} spacing={1}>
+          <Stack sx={{ mt: '40px !important' }} spacing={2}>
             <Button variant="contained" color="primary" type="submit">
               Login
             </Button>

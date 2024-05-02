@@ -26,7 +26,6 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IRegisterForm>({
     resolver: yupResolver<IRegisterForm>(registerFormSchema),
@@ -92,7 +91,7 @@ export default function RegisterPage() {
             helperText={errors.confirmPassword?.message}
             {...register('confirmPassword')}
           />
-          <Stack sx={{ mt: '40px !important' }} spacing={1}>
+          <Stack sx={{ mt: '40px !important' }} spacing={2}>
             <Button variant="contained" color="primary" type="submit">
               Register
             </Button>

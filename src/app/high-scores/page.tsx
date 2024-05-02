@@ -49,7 +49,7 @@ const ScoresPage: FC = () => {
             ))}
           </Stack>
         )}
-        <Stack sx={{ mt: '40px !important' }} spacing={1}>
+        <Stack sx={{ mt: '40px !important' }} spacing={2}>
           <Button variant="contained" onClick={() => refetch()}>
             Refresh
           </Button>
