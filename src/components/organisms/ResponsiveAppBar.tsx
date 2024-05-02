@@ -35,31 +35,44 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <SmartToy sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <SmartToy
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              mr: 1,
+              color: (theme) => theme.palette.grey['50'],
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
             component="a"
             onClick={() => push(ROUTES.HOME)}
+            color={(theme) => theme.palette.grey['50']}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
               cursor: 'pointer',
             }}
           >
             SCRABBLE
           </Typography>
-          <SmartToy sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <SmartToy
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              mr: 1,
+              color: (theme) => theme.palette.grey['50'],
+            }}
+          />
           <Typography
             variant="h5"
             noWrap
             component="a"
             onClick={() => push(ROUTES.HOME)}
+            color={(theme) => theme.palette.grey['50']}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -67,7 +80,6 @@ const ResponsiveAppBar = () => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
               cursor: 'pointer',
             }}
@@ -80,7 +92,7 @@ const ResponsiveAppBar = () => {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    alt={user?.username[0] ?? '?'}
+                    alt={(user?.username[0] ?? '?').toUpperCase()}
                     src="/static/images/avatar/2.jpg"
                   />
                 </IconButton>
