@@ -1,5 +1,6 @@
 import {
   FC,
+  FormEvent,
   KeyboardEvent,
   useContext,
   useEffect,
@@ -42,10 +43,7 @@ const HomePage: FC = () => {
     }
   };
 
-  const handleBackspaceAndEnter = (
-    e: KeyboardEvent<HTMLDivElement>,
-    index: number,
-  ) => {
+  const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
     if (/^[a-zA-Z]$/.test(e.key) && !!stringTileRef.current[index].value) {
       stringTileRef.current[index].value = e.key.toUpperCase();
       handleChange(e.key, index);
@@ -59,9 +57,6 @@ const HomePage: FC = () => {
     if (e.key === 'Backspace' && index > 0) {
       stringTileRef.current[index - 1].focus();
     }
-    if (e.key === 'Enter' && index < tileNumber - 1) {
-      stringTileRef.current[index + 1].focus();
-    }
   };
 
   const handleResetTiles = () => {
@@ -69,8 +64,9 @@ const HomePage: FC = () => {
     stringTileRef.current[0].focus();
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
+      event.preventDefault();
       await createScore({ string: strings.join(''), score });
       handleResetTiles();
       displaySuccessToast('Score saved');
@@ -90,45 +86,47 @@ const HomePage: FC = () => {
 
   return (
     <CenteredCard>
-      <Stack spacing={4}>
-        <Stack direction="row" spacing={2}>
-          {strings.map((value, index) => (
-            <TextField
-              size="small"
-              key={index}
-              inputRef={(ref) => (stringTileRef.current[index] = ref)}
-              value={value}
-              onChange={(e) => handleChange(e.target.value, index)}
-              onKeyUp={(e) => handleBackspaceAndEnter(e, index)}
-              inputProps={{
-                maxLength: 1,
-                style: { textAlign: 'center' },
-              }}
-              sx={{ width: 48 }}
-            />
-          ))}
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <Stack direction="row" spacing={2}>
+            {strings.map((value, index) => (
+              <TextField
+                size="small"
+                key={index}
+                inputRef={(ref) => (stringTileRef.current[index] = ref)}
+                value={value}
+                onChange={(e) => handleChange(e.target.value, index)}
+                onKeyUp={(e) => handleKeyUp(e, index)}
+                inputProps={{
+                  maxLength: 1,
+                  style: { textAlign: 'center' },
+                }}
+                sx={{ width: 48 }}
+              />
+            ))}
+          </Stack>
+          <Typography variant="body1">Score: {score ?? 0}</Typography>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleResetTiles}
+            >
+              Reset Tiles
+            </Button>
+            <Button variant="contained" color="primary" type="submit">
+              Save Score
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => push(ROUTES.HIGH_SCORES)}
+            >
+              View Top Scores
+            </Button>
+          </Stack>
         </Stack>
-        <Typography variant="body1">Score: {score ?? 0}</Typography>
-        <Stack direction="row" spacing={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleResetTiles}
-          >
-            Reset Tiles
-          </Button>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Save Score
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => push(ROUTES.HIGH_SCORES)}
-          >
-            View Top Scores
-          </Button>
-        </Stack>
-      </Stack>
+      </form>
     </CenteredCard>
   );
 };
