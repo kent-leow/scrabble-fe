@@ -33,15 +33,17 @@ const ScoresPage: FC = () => {
     <CenteredCard>
       <Stack spacing={2}>
         <Typography variant="h4">High Scores</Typography>
-        {isLoading ? (
-          <Typography>Loading...</Typography>
-        ) : (
+        {isLoading && <Typography>Loading...</Typography>}
+        {!scores.length && !isLoading && (
+          <Typography>No scores yet!</Typography>
+        )}
+        {!!scores.length && (
           <Stack spacing={1}>
             {scores.map((score, index) => (
               <Stack key={`score-${index}`} direction="row">
                 <Typography
                   flexGrow={1}
-                >{`${index + 1}. ${score.string}`}</Typography>
+                >{`${index + 1}. ${score.string} (${score.user.username})`}</Typography>
                 <Typography>{score.score}</Typography>
               </Stack>
             ))}

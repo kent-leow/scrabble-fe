@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <CenteredCard>
       <Stack spacing={4}>
-        <Typography variant="h4">Welcome to the game</Typography>
+        <Typography variant="h4">Welcome!</Typography>
         <Stack spacing={2}>
           <Button
             variant="contained"

@@ -14,26 +14,17 @@ import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/navigation';
 import AuthContext from '~/core/contexts/AuthContext';
 import { SmartToy } from '@mui/icons-material';
+import { ROUTES } from '~/utils/constants/routes';
 
 const ResponsiveAppBar = () => {
-  const { refresh } = useRouter();
+  const { push } = useRouter();
   const { isAuthenticated, user, logout } = useContext(AuthContext);
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null,
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -49,7 +40,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => push(ROUTES.HOME)}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -58,6 +49,7 @@ const ResponsiveAppBar = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
           >
             SCRABBLE
@@ -67,7 +59,7 @@ const ResponsiveAppBar = () => {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => push(ROUTES.HOME)}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -77,6 +69,7 @@ const ResponsiveAppBar = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
           >
             SCRABBLE
