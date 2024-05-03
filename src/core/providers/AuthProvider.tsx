@@ -15,20 +15,21 @@ import { IUser } from '~/core/domains/users/users.type';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
 import { getMe } from '~/core/apis/users.api';
-import { initAxios } from '~/utils/auth/auth';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
+import { useAxios } from '~/core/hooks/useAxios';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const initAxios = useAxios();
   const router = useRouter();
   const [user, setUser] = React.useState<IUser | null>(null);
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,
   );
-  const [refreshToken, setRefreshToken] = useLocalStorage<string | undefined>(
+  const [_, setRefreshToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
   );
 
