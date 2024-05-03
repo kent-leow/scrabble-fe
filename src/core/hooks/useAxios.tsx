@@ -4,9 +4,6 @@ import { refresh } from '~/core/apis/auth.api';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
 
-let interceptor: number;
-let refreshPromise: unknown;
-
 export const useAxios = () => {
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,
@@ -14,6 +11,8 @@ export const useAxios = () => {
   const [refreshToken, setRefreshToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
   );
+
+  let interceptor: number;
 
   const initAxios = (secured: boolean = true) => {
     axios.defaults.withCredentials = secured;
@@ -46,6 +45,8 @@ export const useAxios = () => {
     return Promise.reject(error);
   };
 
+  let refreshPromise: unknown;
+
   const requestTokenPromise = () => {
     if (!refreshPromise) {
       refreshPromise = requestAccessTokenWithRefreshToken().then(() => {
@@ -60,8 +61,8 @@ export const useAxios = () => {
       throw new Error('No refresh token found');
     }
     const response = await refresh(refreshToken);
-    setToken(response.access_token);
-    setRefreshToken(response.refresh_token);
+    setToken(`"${response.access_token}"`);
+    setRefreshToken(`"${response.refresh_token}"`);
   };
 
   initAxios();
