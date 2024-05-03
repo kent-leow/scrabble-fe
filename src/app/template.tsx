@@ -1,6 +1,7 @@
 'use client';
 import { ReactNode } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import { initAxios } from '~/utils/auth/auth';
 import ResponsiveAppBar from '~/components/organisms/ResponsiveAppBar';
 import AuthProvider from '~/core/providers/AuthProvider';
 import { Stack, ThemeProvider } from '@mui/material';
@@ -9,6 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import theme from '~/utils/themes/theme';
 
+initAxios();
 const queryClient = new QueryClient();
 
 export default function Template({ children }: { children: ReactNode }) {
