@@ -15,7 +15,6 @@ import { IUser } from '~/core/domains/users/users.type';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
 import { getMe } from '~/core/apis/users.api';
-import { initAxios } from '~/utils/auth/auth';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 
 interface AuthProviderProps {
@@ -28,7 +27,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,
   );
-  const [refreshToken, setRefreshToken] = useLocalStorage<string | undefined>(
+  const [_refreshToken, setRefreshToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.REFRESH_TOKEN,
   );
 
@@ -55,7 +54,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       displaySuccessToast('Login successful');
       setToken(authResponse.access_token);
       setRefreshToken(authResponse.refresh_token);
-      initAxios();
       router.push(ROUTES.HOME);
     } catch (e: unknown) {
       displayErrorToast(e);
