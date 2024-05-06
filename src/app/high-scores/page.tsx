@@ -14,12 +14,12 @@ import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 
 const ScoresPage: FC = () => {
   const { push } = useRouter();
-  const { fetchScores } = useScoresAPI();
+  const { getScores } = useScoresAPI();
   const [scores, setScores] = useState<IScoreResponse[]>([]);
 
   const { isLoading, isError, error, data, refetch } = useQuery({
-    queryKey: [QUERY_KEYS.SCORES],
-    queryFn: fetchScores,
+    queryKey: [QUERY_KEYS.GET_SCORES],
+    queryFn: getScores,
   });
 
   if (isError) {

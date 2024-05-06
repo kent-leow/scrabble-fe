@@ -3,20 +3,29 @@
 import React, { ReactNode, useEffect } from 'react';
 import GlobalContext from '~/core/contexts/GlobalContext';
 import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '~/utils/constants/queryKeys';
+import { APP_CONFIG } from '~/utils/constants/appConfig';
 
 interface GlobalProviderProps {
   children: ReactNode;
 }
 
 const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
-  const { fetchScoringRules } = useScoresAPI();
+  const { getScoresRules } = useScoresAPI();
   const [scoreRules, setScoreRules] = React.useState<Record<string, number>>(
     {},
   );
 
+  const { data: scoresRulesData } = useQuery({
+    queryKey: [QUERY_KEYS.GET_SCORES_RULES],
+    queryFn: getScoresRules,
+    staleTime: APP_CONFIG.STALE_TIME,
+  });
+
   useEffect(() => {
-    fetchScoringRules().then((rules) => setScoreRules(rules));
-  }, []);
+    setScoreRules(scoresRulesData ?? {});
+  }, [scoresRulesData]);
 
   return (
     <GlobalContext.Provider value={{ scoreRules }}>

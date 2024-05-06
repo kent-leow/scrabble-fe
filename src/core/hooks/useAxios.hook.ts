@@ -9,7 +9,7 @@ let refreshPromise: unknown;
 let tempToken: string | undefined;
 
 export const useAxiosHook = () => {
-  const { refresh } = useAuthAPI();
+  const { postAuthRefresh } = useAuthAPI();
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,
   );
@@ -61,7 +61,7 @@ export const useAxiosHook = () => {
     if (!refreshToken) {
       throw new Error('No refresh token found');
     }
-    const response = await refresh(refreshToken);
+    const response = await postAuthRefresh(refreshToken);
     tempToken = response.access_token;
     setToken(response.access_token);
     setRefreshToken(response.refresh_token);

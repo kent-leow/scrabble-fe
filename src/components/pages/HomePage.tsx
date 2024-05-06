@@ -18,7 +18,7 @@ import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 
 const HomePage: FC = () => {
   const { push } = useRouter();
-  const { createScore } = useScoresAPI();
+  const { postScores } = useScoresAPI();
   const tileNumber = 10;
   const { scoreRules } = useContext(GlobalContext);
   const [strings, setStrings] = useState<string[]>(
@@ -68,7 +68,7 @@ const HomePage: FC = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      await createScore({ string: strings.join(''), score });
+      await postScores({ string: strings.join(''), score });
       handleResetTiles();
       displaySuccessToast('Score saved');
     } catch (e: unknown) {

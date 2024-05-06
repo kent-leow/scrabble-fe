@@ -12,7 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { MouseEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ILoginForm } from '~/core/domains/auth/auth.type';
 import AuthContext from '~/core/contexts/AuthContext';
 import CenteredCard from '~/components/templates/CenteredCard';
@@ -23,8 +23,6 @@ export default function LoginPage() {
   const { register, handleSubmit } = useForm<ILoginForm>();
   const { login } = useContext(AuthContext);
 
-  const onSubmit: SubmitHandler<ILoginForm> = (data) => login(data);
-
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
@@ -33,7 +31,7 @@ export default function LoginPage() {
 
   return (
     <CenteredCard>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(login)}>
         <Stack spacing={2}>
           <Typography variant="h4">Login</Typography>
           <TextField
