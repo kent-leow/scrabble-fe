@@ -1,14 +1,15 @@
 import axios, { AxiosError, HttpStatusCode } from 'axios';
 import { APP_CONFIG } from '~/utils/constants/appConfig';
-import { refresh } from '~/core/apis/auth.api';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
+import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.hook';
 
 let interceptor: number;
 let refreshPromise: unknown;
 let tempToken: string | undefined;
 
-export const useAxios = () => {
+export const useAxiosHook = () => {
+  const { refresh } = useAuthAPI();
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,
   );

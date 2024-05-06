@@ -5,17 +5,13 @@ import AuthContext from '~/core/contexts/AuthContext';
 import { ILoginForm, IRegisterForm } from '~/core/domains/auth/auth.type';
 import { ROUTES } from '~/utils/constants/routes';
 import { isAxiosError } from 'axios';
-import {
-  login as authLogin,
-  logout as authLogout,
-  register as authRegister,
-} from '~/core/apis/auth.api';
 import { useRouter } from 'next/navigation';
 import { IUser } from '~/core/domains/users/users.type';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
-import { getMe } from '~/core/apis/users.api';
+import { useUsersAPI } from '~/core/hooks/apis/useUsersAPI.hook';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
+import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.hook';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -23,6 +19,12 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const router = useRouter();
+  const { getMe } = useUsersAPI();
+  const {
+    login: authLogin,
+    register: authRegister,
+    logout: authLogout,
+  } = useAuthAPI();
   const [user, setUser] = React.useState<IUser | null>(null);
   const [token, setToken] = useLocalStorage<string | undefined>(
     LOCAL_STORAGE_KEYS.TOKEN,

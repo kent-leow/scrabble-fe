@@ -4,16 +4,17 @@ import { FC, useEffect, useState } from 'react';
 import { Button, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { IScoreResponse } from '~/core/domains/scores/scores.type';
-import { fetchScores } from '~/core/apis/scores.api';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import CenteredCard from '~/components/templates/CenteredCard';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 
 const ScoresPage: FC = () => {
   const { push } = useRouter();
+  const { fetchScores } = useScoresAPI();
   const [scores, setScores] = useState<IScoreResponse[]>([]);
 
   const { isLoading, isError, error, data, refetch } = useQuery({

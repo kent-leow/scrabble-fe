@@ -2,13 +2,14 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import GlobalContext from '~/core/contexts/GlobalContext';
-import { fetchScoringRules } from '~/core/apis/scores.api';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 
 interface GlobalProviderProps {
   children: ReactNode;
 }
 
 const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
+  const { fetchScoringRules } = useScoresAPI();
   const [scoreRules, setScoreRules] = React.useState<Record<string, number>>(
     {},
   );

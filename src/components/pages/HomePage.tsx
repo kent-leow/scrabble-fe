@@ -12,12 +12,13 @@ import Typography from '@mui/material/Typography';
 import GlobalContext from '~/core/contexts/GlobalContext';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
-import { createScore } from '~/core/apis/scores.api';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import CenteredCard from '~/components/templates/CenteredCard';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 
 const HomePage: FC = () => {
   const { push } = useRouter();
+  const { createScore } = useScoresAPI();
   const tileNumber = 10;
   const { scoreRules } = useContext(GlobalContext);
   const [strings, setStrings] = useState<string[]>(

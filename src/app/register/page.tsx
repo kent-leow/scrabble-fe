@@ -13,7 +13,7 @@ import { MouseEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
 import AuthContext from '~/core/contexts/AuthContext';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { IRegisterForm } from '~/core/domains/auth/auth.type';
 import CenteredCard from '~/components/templates/CenteredCard';
 import { registerFormSchema } from '~/core/domains/auth/auth.schema';
@@ -30,7 +30,6 @@ export default function RegisterPage() {
   } = useForm<IRegisterForm>({
     resolver: yupResolver<IRegisterForm>(registerFormSchema),
   });
-  const onSubmit: SubmitHandler<IRegisterForm> = (data) => authRegister(data);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
@@ -40,7 +39,7 @@ export default function RegisterPage() {
 
   return (
     <CenteredCard>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(authRegister)}>
         <Stack spacing={2}>
           <Typography variant="h4">Register</Typography>
           <TextField
