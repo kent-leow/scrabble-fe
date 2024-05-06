@@ -31,7 +31,7 @@ export const useAxiosHook = () => {
   };
 
   const axiosErrorInterceptor = async (error: AxiosError) => {
-    if (error.response?.status === HttpStatusCode.Unauthorized) {
+    if (error.response?.status === HttpStatusCode.Unauthorized && token) {
       const originalRequest = error.config!;
       try {
         await requestTokenPromise();
