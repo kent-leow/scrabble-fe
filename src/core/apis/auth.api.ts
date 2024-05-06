@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { initAxios } from '~/utils/auth/auth';
 import {
   IAuthResponse,
   ILoginForm,
@@ -7,7 +6,6 @@ import {
 } from '~/core/domains/auth/auth.type';
 
 export const login = async (loginForm: ILoginForm) => {
-  initAxios(false);
   const response = await axios.post<IAuthResponse>('/auth/login', loginForm);
   return response.data;
 };
