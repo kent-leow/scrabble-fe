@@ -72,6 +72,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await getAuthLogout();
       queryClient.clear();
       setToken(undefined);
+      setRefreshToken(undefined);
       setUser(null);
       displaySuccessToast('Logout successful');
       router.push(ROUTES.HOME);
