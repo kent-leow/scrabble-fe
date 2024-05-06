@@ -49,8 +49,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const authResponse = await postAuthLogin(loginForm);
       displaySuccessToast('Login successful');
-      setToken(authResponse.access_token);
-      setRefreshToken(authResponse.refresh_token);
+      setToken(authResponse.accessToken);
+      setRefreshToken(authResponse.refreshToken);
       router.push(ROUTES.HOME);
     } catch (e: unknown) {
       displayErrorToast(e);

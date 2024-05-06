@@ -24,7 +24,7 @@ export const useAuthAPI = () => {
 
   const postAuthRefresh = async (refreshToken: string) => {
     const response = await axios.post<IAuthResponse>('/auth/refresh', {
-      refresh_token: refreshToken,
+      refreshToken: refreshToken,
     });
     return response.data;
   };

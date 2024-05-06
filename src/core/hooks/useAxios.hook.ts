@@ -62,9 +62,9 @@ export const useAxiosHook = () => {
       throw new Error('No refresh token found');
     }
     const response = await postAuthRefresh(refreshToken);
-    tempToken = response.access_token;
-    setToken(response.access_token);
-    setRefreshToken(response.refresh_token);
+    tempToken = response.accessToken;
+    setToken(response.accessToken);
+    setRefreshToken(response.refreshToken);
   };
 
   return [initAxios];
