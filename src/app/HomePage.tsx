@@ -46,6 +46,10 @@ const HomePage: FC = () => {
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
+    if (REGEXES.LETTER.test(e.key) && !!stringTileRef.current[index].value) {
+      stringTileRef.current[index].value = e.key.toUpperCase();
+      handleChange(e.key, index);
+    }
     if (e.key === 'ArrowLeft' && index > 0) {
       stringTileRef.current[index - 1].focus();
     }
