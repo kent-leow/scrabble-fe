@@ -23,3 +23,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 3. Add CI/CD pipeline
 4. Add e2e tests
 5. Add Pre-commit hooks
+6. Add swagger ui interface
