@@ -13,7 +13,7 @@ import GlobalContext from '~/core/contexts/GlobalContext';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
 import CenteredCard from '~/components/templates/CenteredCard';
-import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.api';
 import { REGEXES } from '~/utils/constants/regexes';
 import { promiseWithToast } from '~/utils/helpers/general.helper';
 
@@ -46,10 +46,6 @@ const HomePage: FC = () => {
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
-    if (REGEXES.LETTER.test(e.key) && !!stringTileRef.current[index].value) {
-      stringTileRef.current[index].value = e.key.toUpperCase();
-      handleChange(e.key, index);
-    }
     if (e.key === 'ArrowLeft' && index > 0) {
       stringTileRef.current[index - 1].focus();
     }

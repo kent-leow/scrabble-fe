@@ -2,7 +2,7 @@ import axios, { AxiosError, HttpStatusCode } from 'axios';
 import { APP_CONFIG } from '~/utils/constants/appConfig';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
-import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.hook';
+import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.api';
 
 let interceptor: number;
 let refreshPromise: unknown;

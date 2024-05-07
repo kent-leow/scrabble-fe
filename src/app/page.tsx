@@ -4,7 +4,7 @@ import { ROUTES } from '~/utils/constants/routes';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import AuthContext from '~/core/contexts/AuthContext';
-import HomePage from '~/components/pages/HomePage';
+import HomePage from '~/app/HomePage';
 import CenteredCard from '~/components/templates/CenteredCard';
 import Typography from '@mui/material/Typography';
 

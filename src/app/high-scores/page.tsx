@@ -12,7 +12,7 @@ import {
   displaySuccessToast,
 } from '~/utils/helpers/toast.helper';
 import CenteredCard from '~/components/templates/CenteredCard';
-import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.api';
 import { promiseWithToast } from '~/utils/helpers/general.helper';
 import AuthContext from '~/core/contexts/AuthContext';
 import { Role } from '~/core/domains/users/users.enum';

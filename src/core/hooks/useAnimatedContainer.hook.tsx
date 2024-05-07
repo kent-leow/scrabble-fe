@@ -3,7 +3,7 @@ import AnimatedContainer, {
   AnimatedContainerProps,
 } from '~/components/templates/AnimatedContainer';
 
-const useAnimatedContainer = () => {
+const useAnimatedContainerHook = () => {
   const [trigger, setTrigger] = useState<boolean>(false);
 
   const AnimatedBox: FC<AnimatedContainerProps> = useCallback(
@@ -20,4 +20,4 @@ const useAnimatedContainer = () => {
   return [AnimatedBox, () => setTrigger((prev) => !prev)] as const;
 };
 
-export default useAnimatedContainer;
+export default useAnimatedContainerHook;

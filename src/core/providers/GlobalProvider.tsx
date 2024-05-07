@@ -2,7 +2,7 @@
 
 import React, { ReactNode, useEffect } from 'react';
 import GlobalContext from '~/core/contexts/GlobalContext';
-import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.api';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
 import { APP_CONFIG } from '~/utils/constants/appConfig';
