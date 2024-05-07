@@ -1,12 +1,16 @@
-import { toast, ToastOptions } from 'react-toastify';
+import { cssTransition, toast, ToastOptions } from 'react-toastify';
 import { isAxiosError } from 'axios';
 
 const toastSettings: ToastOptions = {
-  autoClose: 2500,
+  autoClose: 2000,
   closeButton: true,
   draggable: false,
-  hideProgressBar: false,
+  hideProgressBar: true,
   position: 'top-center',
+  transition: cssTransition({
+    enter: 'animate__animated animate__flipInX',
+    exit: 'animate__animated animate__flipOutX',
+  }),
 };
 
 export const displayErrorToast = (e: unknown) => {

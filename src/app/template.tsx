@@ -1,6 +1,7 @@
 'use client';
 import { ReactNode, useMemo } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import 'animate.css';
 import ResponsiveAppBar from '~/components/organisms/ResponsiveAppBar';
 import AuthProvider from '~/core/providers/AuthProvider';
 import { Stack, ThemeProvider } from '@mui/material';
