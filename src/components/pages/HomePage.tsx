@@ -12,10 +12,10 @@ import Typography from '@mui/material/Typography';
 import GlobalContext from '~/core/contexts/GlobalContext';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
-import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import CenteredCard from '~/components/templates/CenteredCard';
 import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
 import { REGEXES } from '~/utils/constants/regexes';
+import { promiseWithToast } from '~/utils/helpers/general.helper';
 
 const HomePage: FC = () => {
   const { push } = useRouter();
@@ -67,14 +67,11 @@ const HomePage: FC = () => {
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    try {
+    await promiseWithToast(async () => {
       event.preventDefault();
       await postScores({ string: strings.join(''), score });
       handleResetTiles();
-      displaySuccessToast('Score saved');
-    } catch (e: unknown) {
-      displayErrorToast(e);
-    }
+    }, 'Score saved');
   };
 
   useEffect(() => {

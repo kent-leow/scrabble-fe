@@ -9,11 +9,11 @@ import { IUser } from '~/core/domains/users/users.type';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
 import { useUsersAPI } from '~/core/hooks/apis/useUsersAPI.hook';
-import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.hook';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
 import { APP_CONFIG } from '~/utils/constants/appConfig';
+import { promiseWithToast } from '~/utils/helpers/general.helper';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -46,39 +46,30 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [meData]);
 
   const login = async (loginForm: ILoginForm) => {
-    try {
+    await promiseWithToast(async () => {
       const authResponse = await postAuthLogin(loginForm);
-      displaySuccessToast('Login successful');
       setToken(authResponse.accessToken);
       setRefreshToken(authResponse.refreshToken);
       router.push(ROUTES.HOME);
-    } catch (e: unknown) {
-      displayErrorToast(e);
-    }
+    }, 'Login successful');
   };
 
   const register = async (registerForm: IRegisterForm) => {
-    try {
+    await promiseWithToast(async () => {
       await postAuthRegister(registerForm);
-      displaySuccessToast('Registration successful');
       router.push(ROUTES.HOME);
-    } catch (e: unknown) {
-      displayErrorToast(e);
-    }
+    }, 'Registration successful');
   };
 
   const logout = async () => {
-    try {
+    await promiseWithToast(async () => {
       await getAuthLogout();
       queryClient.clear();
       setToken(undefined);
       setRefreshToken(undefined);
       setUser(null);
-      displaySuccessToast('Logout successful');
       router.push(ROUTES.HOME);
-    } catch (e: unknown) {
-      displayErrorToast(e);
-    }
+    }, 'Logout successful');
   };
 
   return (

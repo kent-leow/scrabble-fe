@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { ROUTES } from '~/utils/constants/routes';
 import AuthContext from '~/core/contexts/AuthContext';
 
+// refactor this to more proper way of handling route guards
 export default function isAuth(Component: any) {
   return function IsAuth(props: any) {
     const { isAuthenticated } = useContext(AuthContext);
