@@ -41,6 +41,20 @@ const MuiButton: {
       },
     },
     {
+      props: { variant: 'contained', color: 'error' },
+      style: {
+        borderColor: colors.semanticRed['400'],
+        borderRadius: '1.75rem',
+        backgroundColor: colors.semanticRed['400'],
+        color: colors.greyscale['0'],
+        '&:hover': {
+          color: colors.greyscale['0'],
+          backgroundColor: colors.semanticRed['400'],
+          borderColor: colors.semanticRed['400'],
+        },
+      },
+    },
+    {
       props: { variant: 'outlined' },
       style: {
         borderColor: colors.greyscale['900'],

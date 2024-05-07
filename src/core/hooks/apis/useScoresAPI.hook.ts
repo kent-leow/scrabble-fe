@@ -16,9 +16,14 @@ export const useScoresAPI = () => {
     return response.data;
   };
 
+  const deleteScores = async () => {
+    return await axios.delete('/scores');
+  };
+
   return {
     postScores,
     getScores,
     getScoresRules,
+    deleteScores,
   };
 };

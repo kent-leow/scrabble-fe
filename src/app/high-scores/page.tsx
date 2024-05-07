@@ -1,5 +1,5 @@
 'use client';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Button, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { IScoreResponse } from '~/core/domains/scores/scores.type';
@@ -13,10 +13,14 @@ import {
 } from '~/utils/helpers/toast.helper';
 import CenteredCard from '~/components/templates/CenteredCard';
 import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { promiseWithToast } from '~/utils/helpers/general.helper';
+import AuthContext from '~/core/contexts/AuthContext';
+import { Role } from '~/core/domains/users/users.enum';
 
 const ScoresPage: FC = () => {
   const { push } = useRouter();
-  const { getScores } = useScoresAPI();
+  const { getScores, deleteScores } = useScoresAPI();
+  const { user } = useContext(AuthContext);
   const [scores, setScores] = useState<IScoreResponse[]>([]);
 
   const { isLoading, isError, error, data, refetch } = useQuery({
@@ -70,6 +74,23 @@ const ScoresPage: FC = () => {
           <Button variant="outlined" onClick={() => push(ROUTES.HOME)}>
             Back
           </Button>
+          {user?.role === Role.ADMIN && (
+            <Button
+              variant="contained"
+              color="error"
+              onClick={async () => {
+                await promiseWithToast(async () => {
+                  await deleteScores();
+                  await refetch();
+                }, 'Scores reset!');
+              }}
+              sx={{
+                mt: '40px !important',
+              }}
+            >
+              Reset
+            </Button>
+          )}
         </Stack>
       </Stack>
     </CenteredCard>
