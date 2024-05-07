@@ -15,3 +15,11 @@ $ yarn lint
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## TODO
+
+1. Add unit tests
+2. Dockerize the app
+3. Add CI/CD pipeline
+4. Add e2e tests
+5. Add Pre-commit hooks
