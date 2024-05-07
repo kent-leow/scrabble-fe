@@ -4,3 +4,5 @@ export const ROUTES = {
   REGISTER: '/register',
   HIGH_SCORES: '/high-scores',
 };
+
+export const PROTECTED_ROUTES = [ROUTES.HIGH_SCORES];

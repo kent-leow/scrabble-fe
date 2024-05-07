@@ -1,5 +1,4 @@
 'use client';
-import isAuth from '~/utils/auth/isAuth';
 import { FC, useEffect, useState } from 'react';
 import { Button, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -77,4 +76,4 @@ const ScoresPage: FC = () => {
   );
 };
 
-export default isAuth(ScoresPage);
+export default ScoresPage;
