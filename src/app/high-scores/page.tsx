@@ -37,12 +37,14 @@ const ScoresPage: FC = () => {
   }, [data]);
 
   return (
-    <CenteredCard>
+    <CenteredCard loading={isLoading}>
       <Stack spacing={2}>
         <Typography variant="h4">Highscores</Typography>
         {isLoading && <Typography>Loading...</Typography>}
         {!scores.length && !isLoading && (
-          <Typography>No scores yet!</Typography>
+          <Stack minHeight="150px" justifyContent="center" alignItems="center">
+            <Typography>No scores yet!</Typography>
+          </Stack>
         )}
         {!!scores.length && (
           <Stack spacing={1}>
