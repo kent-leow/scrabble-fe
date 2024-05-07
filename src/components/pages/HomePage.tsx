@@ -15,6 +15,7 @@ import { ROUTES } from '~/utils/constants/routes';
 import { displayErrorToast, displaySuccessToast } from '~/utils/helpers/toast';
 import CenteredCard from '~/components/templates/CenteredCard';
 import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.hook';
+import { REGEXES } from '~/utils/constants/regexes';
 
 const HomePage: FC = () => {
   const { push } = useRouter();
@@ -32,7 +33,7 @@ const HomePage: FC = () => {
   }, []);
 
   const handleChange = (value: string, index: number) => {
-    if (!/^[a-zA-Z]*$/.test(value)) {
+    if (!REGEXES.LETTERS.test(value)) {
       return;
     }
     let newArr = [...strings];
@@ -45,7 +46,7 @@ const HomePage: FC = () => {
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
-    if (/^[a-zA-Z]$/.test(e.key) && !!stringTileRef.current[index].value) {
+    if (REGEXES.LETTER.test(e.key) && !!stringTileRef.current[index].value) {
       stringTileRef.current[index].value = e.key.toUpperCase();
       handleChange(e.key, index);
     }
