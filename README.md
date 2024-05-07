@@ -12,6 +12,9 @@ $ yarn dev
 
 # check linting
 $ yarn lint
+
+# run tests
+$ yarn test
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

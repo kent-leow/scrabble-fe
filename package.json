@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -29,12 +30,18 @@
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.32.1",
     "@tanstack/react-query-devtools": "^5.32.1",
+    "@testing-library/react": "^15.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "jsdom": "^24.0.0",
     "prettier": "3.2.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0"
   }
 }
