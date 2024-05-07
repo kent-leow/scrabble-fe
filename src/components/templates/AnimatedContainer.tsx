@@ -3,11 +3,34 @@ import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { AnimateCSS } from '~/utils/enums/animateCSS.enum';
 
 interface AnimatedContainerProps {
+  /**
+   * Enable or disable animation.
+   * @default true
+   */
   animate?: boolean;
+  /**
+   * Animate forward or backward.
+   * @default true
+   */
   forward?: boolean;
+  /**
+   * Customise the forward animation.
+   * @default AnimateCSS.BOUNCE_IN
+   */
   forwardAnimation?: AnimateCSS;
+  /**
+   * Customise the backward animation.
+   * @default AnimateCSS.BOUNCE_OUT
+   */
   backwardAnimation?: AnimateCSS;
+  /**
+   * Duration of the animation.
+   */
   duration?: number;
+  /**
+   * Trigger the animation by changing the trigger value.
+   * @default false
+   */
   trigger?: boolean;
   children: ReactNode;
 }
@@ -38,7 +61,7 @@ const AnimatedContainer: FC<AnimatedContainerProps> = ({
   }, [duration]);
 
   useEffect(() => {
-    if (action) {
+    if (animate) {
       ref.current?.classList.remove(backwardAnimation, forwardAnimation);
       setTimeout(
         () =>
@@ -48,7 +71,7 @@ const AnimatedContainer: FC<AnimatedContainerProps> = ({
         25,
       );
     }
-  }, [action, forward, notifier]);
+  }, [action, forward, notifier, animate]);
 
   return (
     <Box ref={ref} className="animate__animated">
