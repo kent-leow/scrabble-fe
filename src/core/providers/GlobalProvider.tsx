@@ -5,7 +5,7 @@ import GlobalContext from '~/core/contexts/GlobalContext';
 import { useScoresAPI } from '~/core/hooks/apis/useScoresAPI.api';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
-import { APP_CONFIG } from '~/utils/constants/appConfig';
+import { APP_CONFIGS } from '~/utils/constants/appConfigs';
 
 interface GlobalProviderProps {
   children: ReactNode;
@@ -20,7 +20,7 @@ const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
   const { data: scoresRulesData } = useQuery({
     queryKey: [QUERY_KEYS.GET_SCORES_RULES],
     queryFn: getScoresRules,
-    staleTime: APP_CONFIG.STALE_TIME,
+    staleTime: APP_CONFIGS.STALE_TIME,
   });
 
   useEffect(() => {

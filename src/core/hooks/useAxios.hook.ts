@@ -1,5 +1,5 @@
 import axios, { AxiosError, HttpStatusCode } from 'axios';
-import { APP_CONFIG } from '~/utils/constants/appConfig';
+import { APP_CONFIGS } from '~/utils/constants/appConfigs';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { LOCAL_STORAGE_KEYS } from '~/utils/constants/localStorageKeys';
 import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.api';
@@ -19,7 +19,7 @@ export const useAxiosHook = () => {
 
   const initAxios = (secured: boolean = true) => {
     axios.defaults.withCredentials = secured;
-    axios.defaults.baseURL = APP_CONFIG.API_URL;
+    axios.defaults.baseURL = APP_CONFIGS.API_URL;
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.interceptors.response.eject(interceptor);
     if (secured) {
@@ -40,7 +40,7 @@ export const useAxiosHook = () => {
       } catch (e) {
         setToken(undefined);
         setRefreshToken(undefined);
-        window.location.replace(APP_CONFIG.APP_URL);
+        window.location.replace(APP_CONFIGS.APP_URL);
         return Promise.reject(error);
       }
       return axios.request(originalRequest);

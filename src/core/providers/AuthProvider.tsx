@@ -12,7 +12,7 @@ import { useUsersAPI } from '~/core/hooks/apis/useUsersAPI.api';
 import { useAuthAPI } from '~/core/hooks/apis/useAuthAPI.api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/utils/constants/queryKeys';
-import { APP_CONFIG } from '~/utils/constants/appConfig';
+import { APP_CONFIGS } from '~/utils/constants/appConfigs';
 import { promiseWithToast } from '~/utils/helpers/general.helper';
 
 interface AuthProviderProps {
@@ -38,7 +38,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     queryKey: [QUERY_KEYS.GET_ME],
     queryFn: getUsersMe,
     enabled: isAuthenticated,
-    staleTime: APP_CONFIG.STALE_TIME,
+    staleTime: APP_CONFIGS.STALE_TIME,
   });
 
   useEffect(() => {
