@@ -22,7 +22,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit } = useForm<ILoginForm>();
   const { login } = useContext(AuthContext);
-
+  console.log('LoginPage');
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {

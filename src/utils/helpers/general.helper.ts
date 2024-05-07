@@ -1,8 +1,8 @@
-import { AsyncFunction } from 'type-fest/source/async-return-type';
 import {
   displayErrorToast,
   displaySuccessToast,
 } from '~/utils/helpers/toast.helper';
+import { AsyncFunction } from 'type-fest/source/async-return-type';
 
 export const promiseWithToast = async (
   promise: AsyncFunction,

@@ -8,7 +8,9 @@
     "start": "next start -p 3001",
     "lint": "next lint",
     "format": "prettier --write .",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "pre-commit": "yarn test && lint-staged"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -45,5 +47,16 @@
     "typescript": "^5",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sh .husky/pre-commit"
+    }
   }
 }
