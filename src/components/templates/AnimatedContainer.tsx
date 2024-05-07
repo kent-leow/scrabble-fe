@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { AnimateCSS } from '~/utils/enums/animateCSS.enum';
 
-interface AnimatedContainerProps {
+export interface AnimatedContainerProps {
   /**
    * Enable or disable animation.
    * @default true

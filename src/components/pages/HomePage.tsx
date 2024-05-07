@@ -85,7 +85,7 @@ const HomePage: FC = () => {
 
   return (
     <CenteredCard>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleResetTiles}>
         <Stack spacing={4}>
           <Stack direction="row" spacing={2}>
             {strings.map((value, index) => (
@@ -106,11 +106,7 @@ const HomePage: FC = () => {
           </Stack>
           <Typography variant="body1">Score: {score ?? 0}</Typography>
           <Stack direction="row" spacing={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleResetTiles}
-            >
+            <Button variant="contained" color="primary" type="reset">
               Reset Tiles
             </Button>
             <Button variant="contained" color="primary" type="submit">
