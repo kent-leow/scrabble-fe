@@ -21,9 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## TODO
 
-1. Add unit tests
-2. Dockerize the app
-3. Add CI/CD pipeline
-4. Add e2e tests
-5. Add Pre-commit hooks
-6. Add swagger ui interface
+1. Dockerize the app
+2. Add CI/CD pipeline
+3. Add e2e tests
+4. Internationalization
