@@ -10,7 +10,10 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "pre-commit": "yarn test && lint-staged"
+    "pre-commit": "yarn test && lint-staged",
+    "docker:up": "yarn docker:down && docker-compose -p scrabble -f docker-compose.yml up -d",
+    "docker:down": "docker-compose -p scrabble -f docker-compose.yml down",
+    "docker:down:clean": "docker-compose -p scrabble -f docker-compose.yml down -v"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -27,6 +30,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
     "react-toastify": "^10.0.5",
+    "type-fest": "^4.18.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {

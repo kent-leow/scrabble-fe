@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  fe:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: scrabble-fe
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=production
