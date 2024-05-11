@@ -15,8 +15,13 @@ const toastSettings: ToastOptions = {
 
 export const displayErrorToast = (e: unknown) => {
   if (isAxiosError(e)) {
-    const error = e.response?.data.message;
-    const errorMessage = Array.isArray(error) ? error.join(', ') : error;
+    let errorMessage;
+    if (e.response?.data.errors && e.response?.data.errors.length) {
+      errorMessage = e.response?.data.errors[0].defaultMessage;
+    } else {
+      const error = e.response?.data.message;
+      errorMessage = Array.isArray(error) ? error.join(', ') : error;
+    }
     toast(errorMessage, { type: 'error', ...toastSettings });
   } else if (e instanceof Error) {
     toast(e.message, { type: 'error', ...toastSettings });
